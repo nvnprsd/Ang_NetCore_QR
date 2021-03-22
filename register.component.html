@@ -1,0 +1,82 @@
+
+<form  #form="ngForm" (submit)="onsubmit(form)">
+<mat-card>
+<mat-accordion>
+   <mat-expansion-panel >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+      Company Registration
+      </mat-panel-title>
+      <mat-panel-description>
+       Company Registration & Updation Section for Qr & Scratch Generator
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+     <div ><mat-form-field appearance="fill">
+        <mat-label>Select Company For Update</mat-label>
+        <mat-select  (selectionChange)="Fetch()"  [(value)]="selected">
+          <mat-option disabled>Select Company To Update</mat-option>
+          <mat-option *ngFor="let p of Service.compList" [value]="p.compInitial" >
+            {{p.companyName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="min"><mat-label>Enter Company Name</mat-label>
+      <input matInput name="CompanyName" [(ngModel)]="type.companyName" type="text"  placeholder="Ex. Holostik India Ltd." required>
+      </mat-form-field>
+      <mat-form-field class="min"> <mat-label>Enter Company Prefix/Company Initial </mat-label>
+        <input matInput name="CompInit" [disabled]="updateT" (keypress)="keyCode($event)" [(ngModel)]="type.compInitial" type="text" placeholder="Ex. 'HO' or 'HI' for Holostik India" required>
+      </mat-form-field>
+    </div>
+    <br>
+      <mat-label>   Enter Sheet Configuration Details Carefully</mat-label>
+      <div class="form-control " >
+
+       <br><mat-checkbox color="primary" [(ngModel)]="type.isVertical" [checked]="type.isVertical">Vertical Sheet</mat-checkbox>
+      <mat-form-field class="min"><mat-label>Total Columns in a Row (TotalCol)</mat-label>
+      <input matInput [(ngModel)]="type.totalCols" name="TotalCol" type="number" min="1" placeholder="Ex. '1,4 or 6 etc" required>
+      </mat-form-field>
+      <mat-form-field class="min">
+      <mat-label>Column Difference (ColDiffs)</mat-label>
+      <input matInput [(ngModel)]="type.codeDiffs" name="ColDiffs" type="number" min="0" placeholder="Ex. '1,4 or 6 etc" required>
+</mat-form-field>
+<mat-form-field class="sml">
+      <mat-label>Total Codes in Sheet (UpsPerSheet)</mat-label>
+      <input matInput [(ngModel)]="type.upsPerSheet" name="UpsPerSheet" type="number" min="1" placeholder="Ex. '1,2 or 3 etc" required>
+</mat-form-field>
+<mat-form-field class="sml">
+      <mat-label>Space Between Sheets</mat-label>
+      <input matInput [(ngModel)]="type.spaceBetweenSheets" name="spaceBetweenSheets" type="number" min="0" placeholder="Ex. '1,2 or 3 etc" required>
+    </mat-form-field>
+    <mat-form-field class="sml">
+      <mat-label>Coulmn Counter Starts</mat-label>
+      <input matInput [(ngModel)]="type.colCntr" name="colCntr" type="number" min="0" placeholder="Ex. '1,4 or 6 etc" required>
+      </mat-form-field>
+
+    </div>
+<br>
+
+    <div class="form-control">
+<mat-label>Wanted to Create Scratch As Well</mat-label><br>
+<mat-checkbox color="primary"[(ngModel)]="type.withScratched" name="withScratched" [checked]="type.withScratched" >Yeah Sure..!</mat-checkbox>
+      <mat-form-field class="min">
+      <mat-label>Enter Suffix For Scratch </mat-label>
+      <input matInput type="text" [(ngModel)]="type.sufix_Scratch" name="sufix_Scrach" placeholder="Ex. AB or A3 etc" >
+      </mat-form-field>
+<mat-form-field class="min">
+      <mat-label>Total length of Scratch Including Suffix</mat-label>
+      <input matInput type="number" [(ngModel)]="type.scr_len" name="scr_len" placeholder="Ex. 6 ie (2 suffix & 4 Generated)" >
+      </mat-form-field>
+
+      <button  mat-raised-button type="submit" color="accent" class="btn">  {{BtnValue}}  </button>
+    </div>
+
+
+    </div>
+
+  </mat-expansion-panel>
+  </mat-accordion>
+
+  </mat-card>
+  </form>
+

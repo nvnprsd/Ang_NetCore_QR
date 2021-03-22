@@ -1,0 +1,24 @@
+
+ <mat-card>
+  <mat-accordion>
+     <mat-expansion-panel >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+           CSV to Qr Generator
+        </mat-panel-title>
+        <mat-panel-description>
+       Expand this to convert CSV which contain only (visible number & Qr data) into Qr Coded Portable Document Format
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+<mat-form-field style="width: 20vw;" > ETP is {{time| number:'1.1-2'}} Minutes
+  <input #file type="file" matInput
+         id="file"
+         (change)="handleFileInput($event.target.files[0])">
+</mat-form-field>
+<button mat-flat-button class="bt btn-success mt-4s" [disabled]="view" style="margin-left: 2vw;" (click)="Upload()">Upload</button>
+
+
+</mat-expansion-panel>
+</mat-accordion>
+
+</mat-card>

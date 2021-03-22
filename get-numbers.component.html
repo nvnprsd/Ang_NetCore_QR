@@ -1,0 +1,61 @@
+
+<form  #from="ngForm" (submit)="onsubmit(from)" >
+  <mat-card>
+    <mat-accordion>
+       <mat-expansion-panel >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Qr & Scratch Generator
+          </mat-panel-title>
+          <mat-panel-description>
+         Numberring/Scratch CSV File Genration Section For Registered Companies
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+  <mat-form-field class="mn" appearance="fill">
+
+    <mat-label>Choose Company</mat-label>
+   <mat-select  [(ngModel)]="SelVal" name="SelVal" (selectionChange)="onSave()">
+    <mat-option selected disabled>Select Company Name</mat-option>
+    <mat-option *ngFor="let p of service.compList" [value]="p.compInitial" >
+      {{p.companyName}}
+    </mat-option>
+   </mat-select>
+  </mat-form-field>
+
+    <mat-form-field class="mn">
+      <mat-label>Enter Numbers To Generate</mat-label>
+     <input  matInput type="number" min="0" maxlength="5"  name="numToGen" [(ngModel)]="numToGen" placeholder="Required QR Numbers" required>
+     </mat-form-field>
+     <mat-checkbox color="primary" [(ngModel)]="withprefix" name="withprefix" >Include Prefix</mat-checkbox>
+
+     <mat-form-field class="mn">
+    <mat-label>Number Generating Starts From</mat-label>
+    <input matInput  name="fromNo" type="number" [(ngModel)]="fromNo" value="{{fromNo}}"  disabled >
+  </mat-form-field>
+    <mat-form-field class="mn">
+      <mat-label>Last Generated Will be</mat-label>
+      <input matInput   name="lastGen" [(ngModel)]="lastGen" type="number" value="{{numToGen+fromNo-1}}"  disabled>
+    </mat-form-field>
+    <mat-form-field class="mn">
+      <mat-label>Enter SO Number</mat-label>
+      <input matInput  name="SONumber" [(ngModel)]="SONumber" placeholder="Sales Order Number" type="string" required>
+    </mat-form-field>
+<br>
+<div align="end">
+  <button mat-flat-button class="bt btn-success mt-4s" type="submit" [disabled]="disable">Submit & Get CSV</button>
+
+    <button mat-flat-button class="bt btn-info mt-4s" type="button" (click)="CallForSo(SONumber)">Get File by Sales Order</button>
+</div>
+  <!--<div class="form-group col-md-4 justify"><br>
+    <span class="d-inline-block" data-toggle="tooltip" data-placement="top" title="Without Generating CSV it will Download the last Generated CSV File">
+  <button type="button" class="btn btn-link" (click)="abc()">Click Here to download File if automatic download not started after Green Flag </button>
+    </span></div>-->
+
+
+
+</mat-expansion-panel>
+</mat-accordion>
+
+</mat-card>
+  </form>

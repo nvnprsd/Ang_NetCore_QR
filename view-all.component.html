@@ -1,0 +1,80 @@
+<form>
+<mat-card>
+  <mat-accordion>
+     <mat-expansion-panel  >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Company & Sales Order History
+        </mat-panel-title>
+        <mat-panel-description>
+      Expand this to View Sales Order History And Numbering Detail of Companies </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <button mat-flat-button class="bt btn-success mt-4s " (click)="getC('0')">Get Companies detail</button>
+      <button mat-flat-button style="margin-left: 5vw;" class="bt btn-success mt-4s" (click)="getC('1')">Show Sales Order History</button>
+
+<div style="min-height: 40vh;">
+
+      <div class="{{Cdstate}}" style="width: 70vw;margin-left: 7vw;">
+        <table mat-table [dataSource]="dataSource"  >
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef>Company Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="lastGen">
+            <th mat-header-cell *matHeaderCellDef> Last Generated Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastGen}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="lastModify">
+            <th mat-header-cell *matHeaderCellDef> Last Updation Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastModify|date:'longDate'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #type1 [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+      </div>
+
+      <div class="{{Sostate}}" style="width: 70vw;margin-left: 7vw;">
+        <table mat-table [dataSource]="dataSource2">
+
+
+          <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef>Company Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="from">
+            <th mat-header-cell *matHeaderCellDef> From Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.from}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="upto">
+            <th mat-header-cell *matHeaderCellDef> To Number </th>
+            <td mat-cell *matCellDef="let element"> {{element.upto}} </td>
+          </ng-container>
+          <ng-container matColumnDef="genDate">
+            <th mat-header-cell *matHeaderCellDef> Creation Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.genDate|date:'longDate'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+        </table>
+
+        <mat-paginator #type2 [pageSizeOptions]="[5,10,25,100]" showFirstLastButtons></mat-paginator>
+      </div>
+</div>
+</mat-expansion-panel>
+</mat-accordion>
+
+</mat-card>
+  </form>
